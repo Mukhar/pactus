@@ -41,6 +41,7 @@ func buildWidgetNode(model *nodeModel) (*widgetNode, error) {
 
 	box := getBoxObj(builder, "id_box_node")
 	labelLocation := getLabelObj(builder, "id_label_working_directory")
+	labelNetworkKeyId := getLabelObj(builder, "id_label_network_key_id")
 	labelNetwork := getLabelObj(builder, "id_label_network")
 
 	cwd, err := os.Getwd()
@@ -49,7 +50,7 @@ func buildWidgetNode(model *nodeModel) (*widgetNode, error) {
 	}
 	labelLocation.SetText(cwd)
 	labelNetwork.SetText(model.node.State().Genesis().ChainType().String())
-
+	labelNetworkKeyId.SetText(model.node.Network().SelfID().String())
 	w := &widgetNode{
 		Box:                  box,
 		model:                model,
